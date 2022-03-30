@@ -1,0 +1,45 @@
+.wrap-card-item {
+  border: none;
+  margin-bottom: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px 20px;
+  cursor: pointer;
+  &__description {
+    display: inline-block;
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+  }
+  &__img {
+    height: 225px;
+    line-height: 225px;
+    img {
+      width: 210px;
+      height: 100%;
+      vertical-align: middle;
+      line-height: normal;
+      margin-bottom: 0;
+      max-width: 100%;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7px;
+    align-items: center
+  }
+  &__title {
+    font-size: 14px;
+    line-height: 20px;
+    display: block;
+    min-height: 70px;
+  }
+  &__price {
+    font-weight: bold;
+    color: black;
+  }
+}
