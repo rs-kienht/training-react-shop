@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import './../style/card.scss'
+import {Product} from './../type/product'
 
 interface IPropsDetials {
-  data: any,
-  clickItemProduct: any
+  data: Product,
+  setDataModal: React.Dispatch<React.SetStateAction<Product>>
 }
-const CardItem: React.FC<IPropsDetials> = ({ data, clickItemProduct }) => {
+const CardItem: React.FC<IPropsDetials> = ({ data, setDataModal }) => {
   const { title, price, description, image } = data;
-  const handleClickItemCard = () => {
-    clickItemProduct(data)
+  const handleClickItemCard = (data:Product) => {
+    setDataModal(data)
   }
   return (
-    <div onClick={handleClickItemCard} className="wrap-card-item">
+    <div onClick={() => handleClickItemCard(data)} className="wrap-card-item">
       <div className="wrap-card-item__img">
         <img alt="img" className="wrap-card-item__image" src={image} />
       </div>

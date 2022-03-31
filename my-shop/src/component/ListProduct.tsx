@@ -3,6 +3,7 @@ import ProductGird from "./ProductGird";
 import { getProduct } from "./../api/getProduct";
 import Loader from "./Loader";
 import ModalInfo from "./Modal";
+import {Product} from './../type/product'
 
 const ListProduct = () => {
   useEffect(() => {
@@ -16,17 +17,9 @@ const ListProduct = () => {
     });
   }, []);
 
-  const [productList, setProductList] = useState([]);
+  const [productList, setProductList] = useState<Product[]>([]);
   const [statusLoader, setStatusLoader] = useState<boolean>(false);
-  const [statusModal, setStausModal] = useState<boolean>(true);
-  const clickItemProduct = (val:any) => {
-    if(val) {
-      setStausModal(true);
-    }
-  };
-  const handeSetStausModal = (val:any) => {
-    setStausModal(val)
-  }
+  const [dataModal, setDataModal] = useState<Product>();
 
   return (
     <div>
@@ -34,10 +27,10 @@ const ListProduct = () => {
         <Loader></Loader>
       ) : (
         <>
-        {statusModal ? <ModalInfo setStausModal={handeSetStausModal}></ModalInfo> : ""}
+        {dataModal ? <ModalInfo dataModal={dataModal} setDataModal={setDataModal}></ModalInfo> : ""}
           <ProductGird
             productList={productList}
-            clickItemProduct ={clickItemProduct}
+            setDataModal={setDataModal}
           ></ProductGird>
         </>
       )}
