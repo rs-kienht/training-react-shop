@@ -20,6 +20,8 @@ const ListProduct = () => {
   const [productList, setProductList] = useState<Product[]>([]);
   const [statusLoader, setStatusLoader] = useState<boolean>(false);
   const [dataModal, setDataModal] = useState<Product>();
+  const handleAddToCart = (dataModal:any) => {
+  }
 
   return (
     <div>
@@ -27,7 +29,7 @@ const ListProduct = () => {
         <Loader></Loader>
       ) : (
         <>
-        {dataModal ? <ModalInfo dataModal={dataModal} setDataModal={setDataModal}></ModalInfo> : ""}
+        {dataModal ? <ModalInfo handleAddToCart={handleAddToCart} dataModal={dataModal} setDataModal={setDataModal}></ModalInfo> : ""}
           <ProductGird
             productList={productList}
             setDataModal={setDataModal}

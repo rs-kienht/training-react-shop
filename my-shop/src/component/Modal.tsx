@@ -4,8 +4,9 @@ import "./../style/modal.scss";
 interface Irops {
   dataModal: any;
   setDataModal: React.Dispatch<React.SetStateAction<any>>;
+  handleAddToCart: React.Dispatch<React.SetStateAction<any>>;
 }
-const ModalInfo: React.FC<Irops> = ({ dataModal, setDataModal }) => {
+const ModalInfo: React.FC<Irops> = ({ dataModal, setDataModal, handleAddToCart }) => {
   const handleCloseModal = () => {
     let Obj = null;
     setDataModal(Obj);
@@ -26,7 +27,7 @@ const ModalInfo: React.FC<Irops> = ({ dataModal, setDataModal }) => {
             <Button variant="secondary" onClick={handleCloseModal}>
               Cancel
             </Button>
-            <Button variant="primary">Add To Cart</Button>
+            <Button onClick={() => handleAddToCart(dataModal)} variant="primary">Add To Cart</Button>
           </div>
         </div>
       </section>
