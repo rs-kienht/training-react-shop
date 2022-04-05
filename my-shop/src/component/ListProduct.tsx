@@ -4,7 +4,8 @@ import { getProduct } from "./../api/getProduct";
 import Loader from "./Loader";
 import ModalInfo from "./Modal";
 import {Product} from './../type/product'
-
+import {ADD_TO_CART} from './../actions/index'
+import { useDispatch } from 'react-redux';
 const ListProduct = () => {
   useEffect(() => {
     let mounted = true;
@@ -20,7 +21,9 @@ const ListProduct = () => {
   const [productList, setProductList] = useState<Product[]>([]);
   const [statusLoader, setStatusLoader] = useState<boolean>(false);
   const [dataModal, setDataModal] = useState<Product>();
+  const dispatch = useDispatch();
   const handleAddToCart = (dataModal:any) => {
+    dispatch(ADD_TO_CART(dataModal))
   }
 
   return (
