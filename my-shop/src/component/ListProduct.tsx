@@ -1,45 +1,45 @@
 import React, { useState, useEffect } from "react";
 import ProductGird from "./ProductGird";
-import { getProduct } from "./../api/getProduct";
+import { getProduct } from "./../actions/index";
 import Loader from "./Loader";
 import ModalInfo from "./Modal";
-import {Product} from './../type/product'
-import {ADD_TO_CART} from './../actions/index'
-import { useDispatch } from 'react-redux';
+import { Product } from "./../type/product";
+import { ADD_TO_CART } from "./../actions/index";
+import { useDispatch, useSelector } from "react-redux";
 const ListProduct = () => {
   useEffect(() => {
-    let mounted = true;
-    setStatusLoader(true);
-    getProduct().then((items) => {
-      if (mounted) {
-        setStatusLoader(false);
-        setProductList(items);
-      }
-    });
-  }, []);
-
-  const [productList, setProductList] = useState<Product[]>([]);
-  const [statusLoader, setStatusLoader] = useState<boolean>(false);
+    dispatch(getProduct);
+  });
+  let listProductItem = [];
+  listProductItem = useSelector((state: any) => state._actionProduct.product);
   const [dataModal, setDataModal] = useState<Product>();
   const dispatch = useDispatch();
-  const handleAddToCart = (dataModal:any) => {
-    dispatch(ADD_TO_CART(dataModal))
-  }
+  const handleAddToCart = (dataModal: any) => {
+    dispatch(ADD_TO_CART(dataModal));
+  };
 
   return (
-    <div>
-      {statusLoader ? (
-        <Loader></Loader>
-      ) : (
+    <>
+      {listProductItem.length > 0 ? (
         <>
-        {dataModal ? <ModalInfo handleAddToCart={handleAddToCart} dataModal={dataModal} setDataModal={setDataModal}></ModalInfo> : ""}
+          {dataModal ? (
+            <ModalInfo
+              handleAddToCart={handleAddToCart}
+              dataModal={dataModal}
+              setDataModal={setDataModal}
+            ></ModalInfo>
+          ) : (
+            ""
+          )}
           <ProductGird
-            productList={productList}
+            productList={listProductItem}
             setDataModal={setDataModal}
           ></ProductGird>
         </>
+      ) : (
+        <Loader></Loader>
       )}
-    </div>
+    </>
   );
 };
 export default ListProduct;

@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <Navbar bg="light" expand="lg" fixed="top">
       <Container>
-        <Navbar.Brand href="/">Shope</Navbar.Brand>
+        <NavLink to="/">Shope</NavLink>
         <Nav className="mr-auto"></Nav>
         <NavLink to="/cart">Cart {counter}</NavLink>
       </Container>

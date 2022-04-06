@@ -15,7 +15,7 @@ const ModalInfo: React.FC<Irops> = ({
     let Obj = null;
     setDataModal(Obj);
   };
-  const { category, description, id, image, price, rating, title } = dataModal;
+  const { category, description, image, price, title } = dataModal;
   return (
     <div onClick={handleCloseModal} className="wrap-modal">
       <section className="wrap-modal__content">

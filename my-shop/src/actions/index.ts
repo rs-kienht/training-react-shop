@@ -1,4 +1,4 @@
-// import {ADD_CART} from './../constants/index'
+import { Dispatch, Action } from "redux"
 export function ADD_TO_CART(payload:any){
   return {
       type:'ADD_TO_CART',
@@ -23,4 +23,14 @@ export function DELETE_CART(index:any){
       index
   }
 }
-
+export function GET_ALL_PRODUCT(payload:any){
+  return {
+      type:'GET_ALL_PRODUCT',
+      payload
+  }
+}
+export async function getProduct(dispatch: Dispatch<Action>) {
+  return await fetch('https://fakestoreapi.com/products')
+    .then(data => data.json())
+    .then(item => dispatch(GET_ALL_PRODUCT(item)))
+}
