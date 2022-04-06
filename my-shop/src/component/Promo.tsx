@@ -3,7 +3,7 @@ import "./../style/promo.scss";
 import { Card, Form, Button } from "react-bootstrap";
 import { Product } from "./../type/product";
 import { useSelector, useDispatch } from "react-redux";
-import { ADD_PROMO,REMOVE_PROMO } from "./../actions/index";
+import { ADD_PROMO, REMOVE_PROMO } from "./../actions/index";
 
 const Promo = () => {
   const dispatch = useDispatch();
@@ -27,16 +27,19 @@ const Promo = () => {
       discount: discount,
       unit: unit || "percent",
     };
-    console.log(listPromo.length)
-    if(listPromo.length === 0) {
+    console.log(listPromo.length);
+    if (listPromo.length === 0) {
       dispatch(ADD_PROMO(payload));
-    }
-    else {
-      listPromo.forEach((item:any) => {
-        if(payload?.code !== '' && payload?.discount !== 0 && item?.code !== payload?.code) {
+    } else {
+      listPromo.forEach((item: any) => {
+        if (
+          payload?.code !== "" &&
+          payload?.discount !== 0 &&
+          item?.code !== payload?.code
+        ) {
           dispatch(ADD_PROMO(payload));
         }
-      })
+      });
     }
     setCode("");
     setDisCount(0);
@@ -95,7 +98,7 @@ const Promo = () => {
             <div className="col-md-7">
               <Card>
                 <div className="wrap-promo__wrap-code">
-                  {listPromo.map((item: any, index:any) => {
+                  {listPromo.map((item: any, index: any) => {
                     return (
                       <div className="wrap-promo__item-code">
                         <span>

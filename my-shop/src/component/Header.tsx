@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 const Header = () => {
-  const counter = useSelector((state:any) => state._actionProduct.numberCart )
+  const counter = useSelector((state: any) => state._actionProduct.numberCart);
   return (
     <Navbar bg="light" expand="lg" fixed="top">
       <Container>

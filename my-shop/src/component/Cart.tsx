@@ -7,9 +7,9 @@ const Cart = () => {
   listCart = useSelector((state: any) => state._actionProduct.listCart);
   const dispatch = useDispatch();
   let totalCart = 0;
-  listCart.forEach((item:any) => {
+  listCart.forEach((item: any) => {
     totalCart += item?.quantity * item?.price;
-  })
+  });
   return (
     <div className="container">
       <div className="wrap-cart">

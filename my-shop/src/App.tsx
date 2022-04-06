@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./component/Header";
 import ListProduct from "./component/ListProduct";
 import Cart from "./component/Cart";
-import Promo from './component/Promo'
+import Promo from "./component/Promo";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (

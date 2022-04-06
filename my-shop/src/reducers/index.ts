@@ -55,7 +55,7 @@ function actionProduct (state = initState, action:AnyAction) {
       return{
         ...state,
         numberCart: state.numberCart +1
-      }
+    }
     case 'DECEREMENT':
       if(state.listCart[action.index].quantity > 1) {
         state.numberCart--;
@@ -66,7 +66,7 @@ function actionProduct (state = initState, action:AnyAction) {
         numberCart: state.numberCart,
         product: state.product,
         listPromo: state.listPromo,
-      }
+    }
     case 'INCEREMENT':
       if(state.listCart[action.index].quantity > 0) {
         state.numberCart++;
@@ -106,9 +106,9 @@ function actionProduct (state = initState, action:AnyAction) {
         numberCart: state.numberCart,
         product: state.product,
         listPromo: [...state.listPromo],
-      }
-      default:
-        return state;
+    }
+    default:
+      return state;
   }
 }
 const manageShop = combineReducers ({
