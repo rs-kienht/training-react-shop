@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux';
 import { AnyAction } from 'redux'
-import {Product} from './../type/product'
+import {Product, Promo} from './../type/product'
 interface CartType {
   numberCart: number,
   listCart: Cart[],
   product: Product[],
+  listPromo: Promo[],
 }
 const initState: CartType = {
   listCart: [],
   numberCart: 0,
   product: [],
+  listPromo: [],
 };
 interface Cart {
   title: string,
@@ -62,7 +64,8 @@ function actionProduct (state = initState, action:AnyAction) {
       return {
         listCart:[...state.listCart],
         numberCart: state.numberCart,
-        product: state.product
+        product: state.product,
+        listPromo: state.listPromo,
       }
     case 'INCEREMENT':
       if(state.listCart[action.index].quantity > 0) {
@@ -72,19 +75,37 @@ function actionProduct (state = initState, action:AnyAction) {
     return {
       listCart:[...state.listCart],
       numberCart: state.numberCart,
-      product: state.product
+      product: state.product,
+      listPromo: state.listPromo,
     }
     case 'DELETE_CART':
       state.listCart.splice(action.index, 1);
     return {
       listCart:[...state.listCart],
       numberCart: state.numberCart -1,
-      product: state.product
+      product: state.product,
+      listPromo: state.listPromo,
     }
     case 'GET_ALL_PRODUCT':
       return {
         ...state,
         product: action.payload
+    }
+    case 'ADD_PROMO':
+      state.listPromo.push(action.payload);
+      return {
+        listCart:[...state.listCart],
+        numberCart: state.numberCart,
+        product: state.product,
+        listPromo: [...state.listPromo],
+    }
+    case 'REMOVE_PROMO':
+      state.listPromo.splice(action.index, 1);
+      return {
+        listCart:[...state.listCart],
+        numberCart: state.numberCart,
+        product: state.product,
+        listPromo: [...state.listPromo],
       }
       default:
         return state;

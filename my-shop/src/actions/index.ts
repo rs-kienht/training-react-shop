@@ -29,6 +29,18 @@ export function GET_ALL_PRODUCT(payload:any){
       payload
   }
 }
+export function ADD_PROMO(payload:any){
+  return {
+      type:'ADD_PROMO',
+      payload
+  }
+}
+export function REMOVE_PROMO(payload:any){
+  return {
+      type:'REMOVE_PROMO',
+      payload
+  }
+}
 export async function getProduct(dispatch: Dispatch<Action>) {
   return await fetch('https://fakestoreapi.com/products')
     .then(data => data.json())

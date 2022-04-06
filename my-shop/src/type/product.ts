@@ -7,3 +7,8 @@ export type Product = {
   rating: {rate: number, count: number}
   title: string;
 }
+export type Promo = {
+  code: string,
+  discount: number,
+  unit: string,
+}
