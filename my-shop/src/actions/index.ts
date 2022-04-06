@@ -17,3 +17,10 @@ export function INCEREMENT(index:any){
       index
   }
 }
+export function DELETE_CART(index:any){
+  return {
+      type:'DELETE_CART',
+      index
+  }
+}
+
