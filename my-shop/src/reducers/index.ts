@@ -35,7 +35,7 @@ function actionProduct (state = initState, action:AnyAction) {
         state.listCart.push(itemObj);
       } else {
         let check = false;
-        state.listCart.map((item, index) => {
+        state.listCart.forEach((item:any, index:any) => {
           if(item.id === action?.payload?.id ) {
             state.listCart[index].quantity++;
             check = true;

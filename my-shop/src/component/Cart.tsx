@@ -15,17 +15,31 @@ const Cart = () => {
     totalCart += item?.quantity * item?.price;
   });
   const [valCode, setValCode] = useState<string>("");
-  const handleBlurPromo = () => {
-    listPromo.forEach((item: any) => {
-      if (item?.code === valCode) {
-        item?.unit === "percent"
-          ? setPriceDisCount((totalCart * (+item?.discount / 100)) | 0)
-          : setPriceDisCount(+item?.discount | 0);
+  const handleBlurPromo = (e:any) => {
+    if (e.key === 'Enter') {
+      let found = listPromo.some((el) => el.code === valCode);
+      if(found) {
+        listPromo.forEach((item: any) => {
+          if (item?.unit === "percent") {
+
+            setPriceDisCount((totalCart * (+item?.discount / 100)))
+          } else {
+            setPriceDisCount(+item?.discount)
+          }
+        })
       } else {
         setPriceDisCount(0);
       }
-    });
+      setValCode('')
+    }
   };
+  const total = totalCart - priceDiscount;
+  const fortmatCurrenyVND = (item:any) => {
+    return item.toLocaleString("it-IT", {
+      style: "currency",
+      currency: "VND",
+    })
+  }
   return (
     <div className="container">
       {listCart.length > 0 ? (
@@ -81,10 +95,7 @@ const Cart = () => {
                   <tr>
                     <td colSpan={3}>Total Carts</td>
                     <td>
-                      {totalCart.toLocaleString("it-IT", {
-                        style: "currency",
-                        currency: "VND",
-                      })}
+                      {fortmatCurrenyVND(totalCart)}
                     </td>
                   </tr>
                 </tbody>
@@ -109,10 +120,7 @@ const Cart = () => {
                 <div className="wrap-cart__info-total">
                   <div className="wrap-cart__title-total">Price Total</div>
                   <div className="wrap-cart__price-total">
-                    {totalCart.toLocaleString("it-IT", {
-                      style: "currency",
-                      currency: "VND",
-                    })}
+                    {fortmatCurrenyVND(totalCart)}
                   </div>
                 </div>
                 <div className="wrap-cart__info-total">
@@ -120,19 +128,13 @@ const Cart = () => {
                     Price Discount
                   </div>
                   <div className="wrap-cart__price-discount">
-                    {priceDiscount.toLocaleString("it-IT", {
-                      style: "currency",
-                      currency: "VND",
-                    })}
+                    {fortmatCurrenyVND(priceDiscount)}
                   </div>
                 </div>
                 <div className="wrap-cart__info-total">
                   <div className="wrap-cart__total-label">Total</div>
                   <div className="wrap-cart__price-total">
-                    {(totalCart - priceDiscount).toLocaleString("it-IT", {
-                      style: "currency",
-                      currency: "VND",
-                    })}
+                    {fortmatCurrenyVND(total)}
                   </div>
                 </div>
               </div>
