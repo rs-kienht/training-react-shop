@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { AnyAction } from 'redux'
-import {Product, Promo} from './../type/product'
+import {Product, PromoCode} from './../type/product'
 interface CartType {
   numberCart: number,
   listCart: Cart[],
   product: Product[],
-  listPromo: Promo[],
+  listPromo: PromoCode[],
 }
 const initState: CartType = {
   listCart: [],
@@ -68,7 +68,7 @@ function actionProduct (state = initState, action:AnyAction) {
         listPromo: state.listPromo,
     }
     case 'INCEREMENT':
-      if(state.listCart[action.index].quantity > 0) {
+      if(state.listCart[action.index].quantity > 0 && state.listCart[action.index].quantity < 8 ) {
         state.numberCart++;
         state.listCart[action.index].quantity++;
       }

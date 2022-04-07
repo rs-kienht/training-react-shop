@@ -26,7 +26,7 @@ const ModalInfo: React.FC<Irops> = ({
           <h1 className="wrap-modal__category">{category}</h1>
           <h1 className="wrap-modal__title">{title}</h1>
           <span className="wrap-modal__description">{description}</span>
-          <p className="wrap-modal__price">Price {price}$</p>
+          <p className="wrap-modal__price">Price {price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</p>
           <div className="wrap-modal__button">
             <Button variant="secondary" onClick={handleCloseModal}>
               Cancel

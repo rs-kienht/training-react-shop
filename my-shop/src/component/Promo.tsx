@@ -1,50 +1,68 @@
 import React, { useState } from "react";
 import "./../style/promo.scss";
 import { Card, Form, Button } from "react-bootstrap";
-import { Product } from "./../type/product";
+import { PromoCode } from "./../type/product";
 import { useSelector, useDispatch } from "react-redux";
 import { ADD_PROMO, REMOVE_PROMO } from "./../actions/index";
 
 const Promo = () => {
   const dispatch = useDispatch();
-  let listPromo = [] as Product[];
+  let listPromo = [] as PromoCode[];
   listPromo = useSelector((state: any) => state._actionProduct.listPromo);
   const [code, setCode] = useState<string>("");
   const [discount, setDisCount] = useState<number>(0);
-  const [unit, setUnit] = useState<string>("");
+  const [unit, setUnit] = useState<string>("DEFAULT");
   const handleInputCode = (e: any) => {
     setCode(e.target.value);
   };
   const handleInputDiscount = (e: any) => {
-    setDisCount(e.target.value);
+    if (e.target.value > 0) setDisCount(e.target.value);
   };
   const handleChangeSelect = (e: any) => {
     setUnit(e.target.value);
   };
   const handleClickAddCode = () => {
-    const payload = {
-      code: code,
-      discount: discount,
-      unit: unit || "percent",
-    };
-    console.log(listPromo.length);
-    if (listPromo.length === 0) {
+    if (
+      listPromo.length === 0 &&
+      unit !== "DEFAULT" &&
+      code !== "" &&
+      discount !== 0
+    ) {
+      let payload = {
+        code: code,
+        discount: discount,
+        unit: unit,
+      };
       dispatch(ADD_PROMO(payload));
     } else {
-      listPromo.forEach((item: any) => {
-        if (
-          payload?.code !== "" &&
-          payload?.discount !== 0 &&
-          item?.code !== payload?.code
-        ) {
-          dispatch(ADD_PROMO(payload));
-        }
-      });
+      let found = listPromo.some((el) => el.code === code);
+      if (!found && unit !== "DEFAULT" && code !== "" && discount !== 0) {
+        let payload2 = {
+          code: code,
+          discount: discount,
+          unit: unit,
+        };
+        dispatch(ADD_PROMO(payload2));
+      }
     }
     setCode("");
     setDisCount(0);
-    setUnit("");
+    setUnit("DEFAULT");
   };
+  const options = [
+    {
+      label: "Select Unit",
+      value: "DEFAULT",
+    },
+    {
+      label: "Percent",
+      value: "percent",
+    },
+    {
+      label: "Money",
+      value: "money",
+    },
+  ];
   return (
     <div className="container">
       <div className="wrap-promo">
@@ -52,7 +70,7 @@ const Promo = () => {
         <Card>
           <Card.Header>Promo Code</Card.Header>
           <div className="row">
-            <div className="col-md-5">
+            <div className="col-md-6">
               <Card>
                 <Card.Header>Create Code</Card.Header>
                 <Card.Body>
@@ -79,14 +97,17 @@ const Promo = () => {
                     </Form.Group>
                     <Form.Group className="wrap-promo__row">
                       <Form.Label>Unit</Form.Label>
-                      <Form.Select
+                      <select
                         className="form-control w-75 float-right"
-                        aria-label="Default select example"
                         onChange={handleChangeSelect}
+                        value={unit}
                       >
-                        <option value="percent">Percent</option>
-                        <option value="money">Money</option>
-                      </Form.Select>
+                        {options.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
                     </Form.Group>
                   </Form>
                   <div className="wrap-promo__btn">
@@ -95,29 +116,36 @@ const Promo = () => {
                 </Card.Body>
               </Card>
             </div>
-            <div className="col-md-7">
-              <Card>
-                <div className="wrap-promo__wrap-code">
-                  {listPromo.map((item: any, index: any) => {
-                    return (
-                      <div className="wrap-promo__item-code">
-                        <span>
-                          Mã code {item?.code} giảm giá {item?.discount}{" "}
-                          {item?.unit === "percent" ? "%" : "$"}
-                        </span>
-                        <button
-                          className="btn btn-danger btn-sm rounded-0"
-                          type="button"
-                          title="Delete"
-                          onClick={() => dispatch(REMOVE_PROMO(index))}
-                        >
-                          <i className="fa fa-trash"></i>
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-              </Card>
+            <div className="col-md-6">
+              <div>
+                {listPromo.length > 0 ? (
+                  <div className="wrap-promo__wrap-code">
+                    {listPromo.map((item: any, index: any) => {
+                      return (
+                        <div key={index} className="wrap-promo__item-code">
+                          <span>
+                            Mã code {item?.code} giảm giá {item?.discount}{" "}
+                            {item?.unit === "percent" ? "%" : "VND"}
+                          </span>
+                          <button
+                            key={index}
+                            className="btn btn-danger btn-sm rounded-0"
+                            type="button"
+                            title="Delete"
+                            onClick={() => dispatch(REMOVE_PROMO(index))}
+                          >
+                            <i className="fa fa-trash"></i>
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="wrap-promo__wrap-code">
+                    <h3>Chưa nhập code nào hết</h3>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </Card>

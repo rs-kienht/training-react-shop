@@ -20,7 +20,7 @@ const CardItem: React.FC<IPropsDetials> = ({ data, setDataModal }) => {
       <div className="wrap-card-item__content">
         <h1 className="wrap-card-item__title">{title}</h1>
         <span className="wrap-card-item__description">{description}</span>
-        <p className="wrap-card-item__price">Price {price}$</p>
+        <p className="wrap-card-item__price">Price {price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</p>
         <Button variant="primary">Add To Cart</Button>
       </div>
     </div>

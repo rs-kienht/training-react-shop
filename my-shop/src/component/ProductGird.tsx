@@ -11,8 +11,8 @@ const ProductGird: React.FC<IPorps> = ({ productList, setDataModal }) => {
   return (
     <Container className="wrap-container">
       <div className="row wrap-container__list">
-        {productList.map((item: any) => (
-          <div className="wrap-list col-md-4 col-xs-12">
+        {productList.map((item: any, index:any) => (
+          <div key={index} className="wrap-list col-md-4 col-xs-12">
             <CardItem setDataModal={setDataModal} data={item}></CardItem>
           </div>
         ))}
