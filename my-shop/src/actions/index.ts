@@ -46,3 +46,9 @@ export async function getProduct(dispatch: Dispatch<Action>) {
     .then(data => data.json())
     .then(item => dispatch(GET_ALL_PRODUCT(item)))
 }
+export function ADD_REVIEW(payload: any) {
+  return {
+    type: 'ADD_REVIEW',
+    payload
+  }
+}

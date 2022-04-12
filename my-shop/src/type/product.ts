@@ -12,3 +12,9 @@ export type PromoCode = {
   discount: number,
   unit: string,
 }
+export type Preview = {
+  title: string,
+  tag: string,
+  product: string,
+  category: string,
+}

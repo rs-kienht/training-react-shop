@@ -9,7 +9,7 @@
   &__content {
     position: fixed;
     background: white;
-    width: 80%;
+    width: 60%;
     height: auto;
     top: 50%;
     left: 50%;
@@ -21,6 +21,7 @@
   &__header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
   }
   &__btn-close {
     margin: -.5rem -.5rem -.5rem auto;
@@ -33,6 +34,17 @@
     opacity: .5;
     padding: .25em;
     width: 1em;
+  }
+  &__item {
+    display : flex;
+    margin-bottom: 20px;
+    align-items: end;
+    label {
+      margin-right: 20px;
+    }
+    .form-control {
+      line-height: 2.5;
+    }
   }
   // &__picture {
   //   width: 350px;

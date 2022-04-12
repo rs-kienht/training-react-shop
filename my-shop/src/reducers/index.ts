@@ -1,17 +1,19 @@
 import { combineReducers } from 'redux';
 import { AnyAction } from 'redux'
-import {Product, PromoCode} from './../type/product'
+import {Product, PromoCode, Preview} from './../type/product'
 interface CartType {
   numberCart: number,
   listCart: Cart[],
   product: Product[],
   listPromo: PromoCode[],
+  listPreview: Preview[],
 }
 const initState: CartType = {
   listCart: [],
   numberCart: 0,
   product: [],
   listPromo: [],
+  listPreview: [],
 };
 interface Cart {
   title: string,
@@ -66,6 +68,7 @@ function actionProduct (state = initState, action:AnyAction) {
         numberCart: state.numberCart,
         product: state.product,
         listPromo: state.listPromo,
+        listPreview: state.listPreview,
     }
     case 'INCEREMENT':
       if(state.listCart[action.index].quantity > 0 && state.listCart[action.index].quantity < 8 ) {
@@ -77,6 +80,7 @@ function actionProduct (state = initState, action:AnyAction) {
       numberCart: state.numberCart,
       product: state.product,
       listPromo: state.listPromo,
+      listPreview: state.listPreview,
     }
     case 'DELETE_CART':
       state.listCart.splice(action.index, 1);
@@ -85,6 +89,7 @@ function actionProduct (state = initState, action:AnyAction) {
       numberCart: state.numberCart -1,
       product: state.product,
       listPromo: state.listPromo,
+      listPreview: [...state.listPreview],
     }
     case 'GET_ALL_PRODUCT':
       return {
@@ -98,6 +103,7 @@ function actionProduct (state = initState, action:AnyAction) {
         numberCart: state.numberCart,
         product: state.product,
         listPromo: [...state.listPromo],
+        listPreview: [...state.listPreview],
     }
     case 'REMOVE_PROMO':
       state.listPromo.splice(action.index, 1);
@@ -106,7 +112,17 @@ function actionProduct (state = initState, action:AnyAction) {
         numberCart: state.numberCart,
         product: state.product,
         listPromo: [...state.listPromo],
+        listPreview: [...state.listPreview],
     }
+    case 'ADD_REVIEW':
+      state.listPreview.push(action?.payload)
+      return {
+        listCart:state.listCart,
+        numberCart: state.numberCart,
+        product: state.product,
+        listPromo: state.listPromo,
+        listPreview: [...state.listPreview],
+      }
     default:
       return state;
   }
