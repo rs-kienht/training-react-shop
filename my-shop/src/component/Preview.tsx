@@ -16,7 +16,8 @@ const Preview = () => {
   let listPreview = [] as any;
   listPreview = useSelector((state: any) => state._actionProduct.listPreview);
   const handleClickItemPreview = (item:any) => {
-    navigate('/Players');
+    let id = item?.title.toLowerCase().replaceAll(' ', '-')
+    navigate(`/details/${id}`)
   }
   return (
     <div className="container wrap-preview">

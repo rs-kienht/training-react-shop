@@ -27,7 +27,7 @@ const ModalAddPreview: React.FC<IProps> = ({ setDisplayModal }) => {
         title: title,
         tags: tags,
         product: product,
-        category: category,
+        category: category
       };
       dispatch(ADD_REVIEW(obj));
     }
@@ -65,7 +65,7 @@ const ModalAddPreview: React.FC<IProps> = ({ setDisplayModal }) => {
             <Form.Group className="mb-3 modal-preview__item">
               <Form.Label>Tags</Form.Label>
               <select
-                className="form-control w-75 float-right"
+                className="form-control"
                 onChange={handleChangeSelect}
                 value={product}
               >
